@@ -67,7 +67,7 @@
  * or implied, of Andrea Leofreddi.
  */
 
-"use strict";
+// jshint browser:true
 
 /// CONFIGURATION 
 /// ====>
@@ -90,6 +90,8 @@ setupHandlers(root);
  * Register handlers
  */
 function setupHandlers(root){
+	"use strict";
+
 	setAttributes(root, {
 		"onmouseup" : "handleMouseUp(evt)",
 		"onmousedown" : "handleMouseDown(evt)",
@@ -107,7 +109,9 @@ function setupHandlers(root){
  * Retrieves the root element for SVG manipulation. The element is then cached into the svgRoot global variable.
  */
 function getRoot(root) {
-	if(svgRoot == null) {
+	"use strict";
+
+	if(svgRoot === null) {
 		var r = root.getElementById("viewport") ? root.getElementById("viewport") : root.documentElement, t = r;
 
 		while(t != root) {
@@ -130,6 +134,8 @@ function getRoot(root) {
  * Instance an SVGPoint object with given event coordinates.
  */
 function getEventPoint(evt) {
+	"use strict";
+
 	var p = root.createSVGPoint();
 
 	p.x = evt.clientX;
@@ -142,6 +148,8 @@ function getEventPoint(evt) {
  * Sets the current transform matrix of an element.
  */
 function setCTM(element, matrix) {
+	"use strict";
+
 	var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
 
 	element.setAttribute("transform", s);
@@ -151,6 +159,8 @@ function setCTM(element, matrix) {
  * Dumps a matrix to a string (useful for debug).
  */
 function dumpMatrix(matrix) {
+	"use strict";
+
 	var s = "[ " + matrix.a + ", " + matrix.c + ", " + matrix.e + "\n  " + matrix.b + ", " + matrix.d + ", " + matrix.f + "\n  0, 0, 1 ]";
 
 	return s;
@@ -160,6 +170,8 @@ function dumpMatrix(matrix) {
  * Sets attributes of an element.
  */
 function setAttributes(element, attributes){
+	"use strict";
+
 	for (var i in attributes)
 		element.setAttributeNS(null, i, attributes[i]);
 }
@@ -168,6 +180,8 @@ function setAttributes(element, attributes){
  * Handle mouse wheel event.
  */
 function handleMouseWheel(evt) {
+	"use strict";
+
 	if(!enableZoom)
 		return;
 
@@ -208,6 +222,8 @@ function handleMouseWheel(evt) {
  * Handle mouse move event.
  */
 function handleMouseMove(evt) {
+	"use strict";
+
 	if(evt.preventDefault)
 		evt.preventDefault();
 
@@ -215,16 +231,17 @@ function handleMouseMove(evt) {
 
 	var svgDoc = evt.target.ownerDocument;
 
-	var g = getRoot(svgDoc);
+	var g = getRoot(svgDoc),
+		p;
 
 	if(state == 'pan' && enablePan) {
 		// Pan mode
-		var p = getEventPoint(evt).matrixTransform(stateTf);
+		p = getEventPoint(evt).matrixTransform(stateTf);
 
 		setCTM(g, stateTf.inverse().translate(p.x - stateOrigin.x, p.y - stateOrigin.y));
 	} else if(state == 'drag' && enableDrag) {
 		// Drag mode
-		var p = getEventPoint(evt).matrixTransform(g.getCTM().inverse());
+		p = getEventPoint(evt).matrixTransform(g.getCTM().inverse());
 
 		setCTM(stateTarget, root.createSVGMatrix().translate(p.x - stateOrigin.x, p.y - stateOrigin.y).multiply(g.getCTM().inverse()).multiply(stateTarget.getCTM()));
 
@@ -236,6 +253,8 @@ function handleMouseMove(evt) {
  * Handle click event.
  */
 function handleMouseDown(evt) {
+	"use strict";
+
 	if(evt.preventDefault)
 		evt.preventDefault();
 
@@ -246,8 +265,7 @@ function handleMouseDown(evt) {
 	var g = getRoot(svgDoc);
 
 	if(
-		evt.target.tagName == "svg" 
-		|| !enableDrag // Pan anyway when drag is disabled and the user clicked on an element 
+		evt.target.tagName == "svg" || !enableDrag // Pan anyway when drag is disabled and the user clicked on an element 
 	) {
 		// Pan mode
 		state = 'pan';
@@ -271,6 +289,8 @@ function handleMouseDown(evt) {
  * Handle mouse button release event.
  */
 function handleMouseUp(evt) {
+	"use strict";
+
 	if(evt.preventDefault)
 		evt.preventDefault();
 
