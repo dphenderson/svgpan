@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" id="Flag-of-California" width="900" height="600" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" version="1">
+<svg xmlns="http://www.w3.org/2000/svg" id="Flag-of-California" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" version="1">
   <metadata id="metadata61">
     <rdf:RDF>
       <cc:Work>
@@ -51,7 +51,8 @@
       </cc:License>
     </rdf:RDF>
   </metadata>
-  <g id="flag">
+  <script xlink:href="SVGPan.js"/>
+  <g id="viewport">
     <path id="background" fill="#fff" d="M0 0h900v600H0z"/>
     <path id="star" fill="#b71234" d="M123.43929 155.99861l10.04554-30.98776L107.025 105.9051l32.82839.00003L150 74.999998l10.14661 30.905102H192.975l-26.45984 19.10576L176.55265 156 150 136.89387l-25.94727 18.6857z"/>
     <path id="Stripe" fill="#b71234" d="M0 500h900v99.999992H0z"/>
